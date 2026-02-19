@@ -5,6 +5,7 @@ set -e
 /etc/init.d/ssh start
 sleep 1
 su - gpadmin bash -c 'gpstart -a'
+su - gpadmin bash -c 'pxf cluster start'
 trap "kill %1; su - gpadmin bash -c 'gpstop -a -M fast' && END=1" INT TERM
 
 tail -f `ls /data/{master,coordinator}/gpsne-1/{pg_log,log}/gpdb-* | tail -n1` &
